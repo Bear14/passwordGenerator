@@ -3,4 +3,4 @@ project(passwordGenerator)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(passwordGenerator main.cpp Generator.cpp Generator.h)
+add_executable(passwordGenerator src/main.cpp src/Generator.cpp src/Generator.h)
