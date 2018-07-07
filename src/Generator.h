@@ -32,7 +32,7 @@ public:
     void placeSpecialCharacter(std::string character);
     void clearSpecialCharacter(std::string character);
 
-    std::string generatePasswords(unsigned int count, unsigned int length);
+    void generatePasswords(unsigned int count, unsigned int length);
 
 };
 

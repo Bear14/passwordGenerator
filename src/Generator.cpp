@@ -119,7 +119,7 @@ void Generator::clearSpecialCharacter(std::string character) {
 }
 
 
-std::string Generator::generatePasswords(unsigned int count, unsigned int length) {
+void Generator::generatePasswords(unsigned int count, unsigned int length) {
     this->buildAlphabet();
     std::vector<std::string> passwordList;
     std::random_device rd;
