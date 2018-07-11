@@ -5,7 +5,6 @@
 
 #include "Generator.h"
 #include <ctime>
-#include <ctime>
 #include <random>
 #include <algorithm>
 #include <sstream>
@@ -122,12 +121,19 @@ void Generator::clearSpecialCharacter(std::string character) {
 void Generator::generatePasswords(unsigned int count, unsigned int length) {
     this->buildAlphabet();
     std::vector<std::string> passwordList;
+
+    /*
+     * Setup random number generator
+     */
+    time_t rawTime;
     std::random_device rd;
+    std::mt19937 gen(rd() + time(&rawTime));
+    std::uniform_int_distribution<> dis(0, this->alphabet.size() - 1);
+
     for (int i = 0; i < count; ++i) {
         std::string buffer;
         for (int j = 0; j < length; ++j) {
-            buffer += this->alphabet[rd() % this->alphabet.size()];
-
+            buffer += this->alphabet[dis(gen)];
         }
         passwordList.push_back(buffer);
 
