@@ -127,8 +127,8 @@ void Generator::generatePasswords(unsigned int count, unsigned int length) {
      */
     time_t rawTime;
     std::random_device rd;
-    std::mt19937 gen(rd() + time(&rawTime));
-    std::uniform_int_distribution<> dis(0, this->alphabet.size() - 1);
+    std::mt19937 gen((unsigned int)(rd() + time(&rawTime)));
+    std::uniform_int_distribution<> dis(0, (unsigned int)this->alphabet.size() - 1);
 
     for (int i = 0; i < count; ++i) {
         std::string buffer;
