@@ -30,11 +30,15 @@ void Generator::printSpecial() {        //just for debugging
 
 void Generator::printAlphabet() {
     this->buildAlphabet();
-    std::cout << "[  ";
+    std::cout << "[ ";
     for (const auto &i : this->alphabet) {
-        std::cout << i << ",";
+        std::cout << i;
+        if(i != this->alphabet.back()){
+            std::cout  << ", ";
+        }
+
     }
-    std::cout << "  ]\n";
+    std::cout << " ]\n";
 
 }
 
@@ -139,6 +143,7 @@ void Generator::generatePasswords(unsigned int count, unsigned int length) {
 
     }
 
+    std::cout << std::flush;
     for (const auto &k : passwordList) {
         std::cout << k << std::endl;
     }
