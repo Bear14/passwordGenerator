@@ -2,25 +2,25 @@
 // Created by torbe on 10-May-18.
 //
 
-
 #include "Generator.h"
-#include <ctime>
-#include <random>
+
 #include <algorithm>
-#include <sstream>
+#include <ctime>
 #include <iostream>
+#include <random>
+#include <sstream>
 
 void Generator::buildAlphabet() {
     this->alphabet.clear();
     this->alphabet.reserve(
-            this->upperCase.size() + this->lowerCase.size() + this->numbers.size() + this->special.size());
+        this->upperCase.size() + this->lowerCase.size() + this->numbers.size() + this->special.size());
     this->alphabet.insert(this->alphabet.end(), this->upperCase.begin(), this->upperCase.end());
     this->alphabet.insert(this->alphabet.end(), this->lowerCase.begin(), this->lowerCase.end());
     this->alphabet.insert(this->alphabet.end(), this->numbers.begin(), this->numbers.end());
     this->alphabet.insert(this->alphabet.end(), this->special.begin(), this->special.end());
 }
 
-void Generator::printSpecial() {        //just for debugging
+void Generator::printSpecial() {  //just for debugging
     std::cout << "(  ";
     for (const auto &i : this->special) {
         std::cout << i << ",";
@@ -33,15 +33,12 @@ void Generator::printAlphabet() {
     std::cout << "[ ";
     for (const auto &i : this->alphabet) {
         std::cout << i;
-        if(i != this->alphabet.back()){
-            std::cout  << ", ";
+        if (i != this->alphabet.back()) {
+            std::cout << ", ";
         }
-
     }
     std::cout << " ]\n";
-
 }
-
 
 void Generator::placeSpecialCharacter(std::string character) {
     std::vector<char> toPlaceChars(character.begin(), character.end());
@@ -58,7 +55,6 @@ void Generator::placeSpecialCharacter(std::string character) {
                 toPlaceChars.erase(toPlaceChars.begin() + h);
             }
         }
-
     }
 
     /*
@@ -91,36 +87,30 @@ void Generator::placeSpecialCharacter(std::string character) {
      */
 
     std::sort(this->special.begin(), this->special.end());
-
-
 }
 
 void Generator::clearSpecialCharacter(std::string character) {
-
     std::vector<char> toDelChars(character.begin(), character.end());
     std::sort(toDelChars.begin(), toDelChars.end());
 
     for (int i = 0; i < this->special.size(); ++i) {
         if (this->special[i][0] == toDelChars.front()) {
             this->special.erase(this->special.begin() + i);
-            if (i != 0) { i--; }
+            if (i != 0) {
+                i--;
+            }
             toDelChars.erase(toDelChars.begin());
         }
-
-
     }
     if (!toDelChars.empty()) {
-
         std::cout << "Error: Characters: ";
         for (char toDelChar : toDelChars) {
             std::cout << toDelChar << ", ";
         }
         std::cout << "are invalid special characters.\n";
-
     }
     this->buildAlphabet();
 }
-
 
 void Generator::generatePasswords(unsigned int count, unsigned int length) {
     this->buildAlphabet();
@@ -140,7 +130,6 @@ void Generator::generatePasswords(unsigned int count, unsigned int length) {
             buffer += this->alphabet[dis(gen)];
         }
         passwordList.push_back(buffer);
-
     }
 
     std::cout << std::flush;
